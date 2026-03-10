@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div>SME App Security Monitor</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/login">Admin Login</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card hero">
+            <div class="hero-text">
+                <h1>Enhancing Small Business Cybersecurity through Application Security</h1>
+                <p>
+                    This application is a lightweight security monitoring platform designed for
+                    small and medium-sized enterprises (SMEs). It helps administrators register
+                    SME web applications, run security assessments, review vulnerabilities,
+                    and monitor findings through a centralized dashboard.
+                </p>
+                <p>
+                    The system demonstrates how application security can be integrated into
+                    small business environments using affordable tools and structured monitoring.
+                </p>
+                <a class="btn" href="/login">Admin Login</a>
+                <a class="btn" href="/about">Learn More</a>
+            </div>
+
+            <div class="hero-box">
+                <h3>Core Functions</h3>
+                <ul>
+                    <li>Register SME target applications</li>
+                    <li>Run security assessments</li>
+                    <li>View scan results</li>
+                    <li>Review recommendations</li>
+                    <li>Track scan history</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

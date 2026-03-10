@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div>Scan Results</div>
+        <div>
+            <a href="/admin_dashboard">Dashboard</a>
+            <a href="/applications">Applications</a>
+            <a href="/recommendations">Recommendations</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Detected Vulnerabilities</h2>
+            <p>
+                This page displays the findings detected during security assessment of registered SME applications.
+            </p>
+
+            {% if results %}
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Application</th>
+                        <th>Tool</th>
+                        <th>Vulnerability</th>
+                        <th>Severity</th>
+                        <th>Status</th>
+                        <th>Scan Time</th>
+                    </tr>
+                    {% for row in results %}
+                    <tr>
+                        <td>{{ row.id }}</td>
+                        <td>{{ row.app_name }}</td>
+                        <td>{{ row.tool_name }}</td>
+                        <td>{{ row.vulnerability }}</td>
+                        <td>
+                            {% if row.severity == "High" %}
+                                <span class="badge-high">High</span>
+                            {% elif row.severity == "Medium" %}
+                                <span class="badge-medium">Medium</span>
+                            {% elif row.severity == "Low" %}
+                                <span class="badge-low">Low</span>
+                            {% else %}
+                                <span class="badge-info">{{ row.severity }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ row.status }}</td>
+                        <td>{{ row.scan_time }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="empty-state">
+                    No scan results available yet. Add an application and run a security scan.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

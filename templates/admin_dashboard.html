@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div>Security Monitoring Dashboard</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/applications">Applications</a>
+            <a href="/scan_results">Results</a>
+            <a href="/recommendations">Recommendations</a>
+            <a href="/scan_history">History</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="card">
+            <h2>Welcome, {{ username }}</h2>
+            <p>
+                This dashboard is the central monitoring interface for registered SME web applications.
+                Administrators can register target applications, run assessments, review findings,
+                and track historical scan activity.
+            </p>
+
+            <a class="btn" href="/add_application">Register SME Application</a>
+            <a class="btn" href="/applications">View Applications</a>
+            <a class="btn" href="/scan_results">View Findings</a>
+            <a class="btn" href="/recommendations">View Recommendations</a>
+            <a class="btn" href="/scan_history">View Scan History</a>
+            <a class="btn btn-danger" href="/clear_results">Clear Findings</a>
+        </div>
+
+        <div class="cards">
+            <div class="summary-card">
+                <h3>Registered Apps</h3>
+                <p>{{ total_apps }}</p>
+            </div>
+            <div class="summary-card">
+                <h3>Total Findings</h3>
+                <p>{{ total_results }}</p>
+            </div>
+            <div class="summary-card">
+                <h3>High</h3>
+                <p>{{ high_count }}</p>
+            </div>
+            <div class="summary-card">
+                <h3>Medium</h3>
+                <p>{{ medium_count }}</p>
+            </div>
+            <div class="summary-card">
+                <h3>Low</h3>
+                <p>{{ low_count }}</p>
+            </div>
+        </div>
+
+        <div class="risk-box">
+            <h3>Current Security Risk Score</h3>
+            <p><strong>Risk Score:</strong> {{ risk_score }}</p>
+            <p><strong>Risk Level:</strong> {{ risk_level }}</p>
+            <p>
+                The risk score is calculated using the severity of current findings and helps
+                administrators estimate the security posture of monitored SME applications.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Recent Scan Activity</h3>
+            {% if recent_scans %}
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Target Application</th>
+                        <th>Scan Name</th>
+                        <th>Run By</th>
+                        <th>Total Findings</th>
+                        <th>Timestamp</th>
+                    </tr>
+                    {% for scan in recent_scans %}
+                    <tr>
+                        <td>{{ scan.id }}</td>
+                        <td>{{ scan.app_name }}</td>
+                        <td>{{ scan.scan_name }}</td>
+                        <td>{{ scan.run_by }}</td>
+                        <td>{{ scan.total_findings }}</td>
+                        <td>{{ scan.timestamp }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="empty-state">
+                    No security scans have been performed yet.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

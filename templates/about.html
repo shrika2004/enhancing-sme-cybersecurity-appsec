@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div>SME App Security Monitor</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/login">Admin Login</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>About the Project</h2>
+            <p>
+                Small and medium-sized enterprises often use web applications without having
+                dedicated application security teams or structured vulnerability monitoring.
+                This project addresses that gap by providing a lightweight security monitoring
+                platform for SME applications.
+            </p>
+
+            <h3>What the system does</h3>
+            <ul>
+                <li>Registers SME web applications as security assessment targets</li>
+                <li>Performs lightweight security checks</li>
+                <li>Stores and displays detected findings</li>
+                <li>Provides recommendations for improving security</li>
+                <li>Maintains scan history for tracking and monitoring</li>
+            </ul>
+
+            <h3>Security Tools Referenced</h3>
+            <ul>
+                <li><strong>Bandit:</strong> Static analysis for Python applications</li>
+                <li><strong>OWASP ZAP:</strong> Dynamic security testing for web applications</li>
+            </ul>
+
+            <p>
+                This project demonstrates how small businesses can strengthen application
+                security using a centralized and affordable monitoring system.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

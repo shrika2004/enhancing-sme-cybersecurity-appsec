@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register SME Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div>Register Target Application</div>
+        <div>
+            <a href="/admin_dashboard">Dashboard</a>
+            <a href="/applications">Applications</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Register SME Web Application</h2>
+            <p>
+                Add the details of the SME application that needs to be monitored and assessed
+                for application security issues.
+            </p>
+
+            <form method="POST">
+                <div class="form-group">
+                    <label>Application Name</label><br>
+                    <input type="text" name="app_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Business Name</label><br>
+                    <input type="text" name="business_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Target URL</label><br>
+                    <input type="text" name="target_url" placeholder="http://127.0.0.1:5001" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Technology Stack</label><br>
+                    <input type="text" name="tech_stack" placeholder="Flask / HTML / SQLite" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label><br>
+                    <input type="text" name="description" required>
+                </div>
+
+                <button class="btn" type="submit">Register Application</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div>SME App Security Monitor</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Administrator Login</h2>
+            <p>
+                Login to access the SME Application Security Monitoring Dashboard.
+            </p>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="flash">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <label>Username</label><br>
+                    <input type="text" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label><br>
+                    <input type="password" name="password" required>
+                </div>
+
+                <button class="btn" type="submit">Login</button>
+            </form>
+            <p style="margin-top:15px;">
+            Don't have an admin account?
+            <a href="/register">Create Admin Account</a>
+            </p>
+
+            {% if message %}
+                <p style="color:red;"><strong>{{ message }}</strong></p>
+            {% endif %}
+
+            <div class="notice">
+                <strong>Demo Admin Account:</strong><br>
+                admin / admin123
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div>Scan History</div>
+        <div>
+            <a href="/admin_dashboard">Dashboard</a>
+            <a href="/applications">Applications</a>
+            <a href="/scan_results">Results</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Security Scan History</h2>
+
+            {% if history %}
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Application</th>
+                        <th>Scan Name</th>
+                        <th>Run By</th>
+                        <th>Total Findings</th>
+                        <th>Timestamp</th>
+                    </tr>
+                    {% for item in history %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.app_name }}</td>
+                        <td>{{ item.scan_name }}</td>
+                        <td>{{ item.run_by }}</td>
+                        <td>{{ item.total_findings }}</td>
+                        <td>{{ item.timestamp }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="empty-state">
+                    No scan history available yet.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

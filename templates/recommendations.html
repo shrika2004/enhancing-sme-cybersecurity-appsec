@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div>Recommendations</div>
+        <div>
+            <a href="/admin_dashboard">Dashboard</a>
+            <a href="/applications">Applications</a>
+            <a href="/scan_results">Results</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Security Recommendations</h2>
+            <p>
+                These recommendations are generated based on the security findings identified during assessment.
+                They help administrators understand how to improve the security posture of SME applications.
+            </p>
+
+            {% if recommendations %}
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Application</th>
+                        <th>Vulnerability</th>
+                        <th>Severity</th>
+                        <th>Recommendation</th>
+                        <th>Status</th>
+                    </tr>
+                    {% for item in recommendations %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.app_name }}</td>
+                        <td>{{ item.vulnerability }}</td>
+                        <td>
+                            {% if item.severity == "High" %}
+                                <span class="badge-high">High</span>
+                            {% elif item.severity == "Medium" %}
+                                <span class="badge-medium">Medium</span>
+                            {% elif item.severity == "Low" %}
+                                <span class="badge-low">Low</span>
+                            {% else %}
+                                <span class="badge-info">{{ item.severity }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ item.recommendation }}</td>
+                        <td>{{ item.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="empty-state">
+                    No recommendations available because no scans have been run yet.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

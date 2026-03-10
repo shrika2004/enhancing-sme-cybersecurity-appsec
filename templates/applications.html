@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registered Applications</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div>Registered SME Applications</div>
+        <div>
+            <a href="/admin_dashboard">Dashboard</a>
+            <a href="/add_application">Register App</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="card">
+            <h2>Target Applications</h2>
+            <p>
+                These are the SME web applications currently registered in the monitoring system.
+                Each application can be selected for security assessment.
+            </p>
+
+            {% if apps %}
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Application Name</th>
+                        <th>Business Name</th>
+                        <th>Target URL</th>
+                        <th>Tech Stack</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for app in apps %}
+                    <tr>
+                        <td>{{ app.id }}</td>
+                        <td>{{ app.app_name }}</td>
+                        <td>{{ app.business_name }}</td>
+                        <td>{{ app.target_url }}</td>
+                        <td>{{ app.tech_stack }}</td>
+                        <td>{{ app.description }}</td>
+                        <td>
+                            <a class="btn" href="/run_scan/{{ app.id }}">Run Security Scan</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="empty-state">
+                    No SME applications registered yet. Add a target application first.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
